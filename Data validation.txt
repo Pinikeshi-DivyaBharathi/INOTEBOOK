@@ -1,0 +1,51 @@
+Data Validation (MERN stack)
+
+const {body,validationResult }=require('express')
+
+router.post( path , validations , (req,res) =>{   })
+
+example:
+router.post('/',[body('name','error msg').isLength({ min:3 }),
+                body('email').isEmail(),
+                body('password').isLength({min :5}) ],
+                (req,res)=>{
+
+                   const errors= validationResult(req);
+                   if(!errors.isEmpty()){
+                         return      res.status(400).json({ errors:errors.array() });
+}
+res.send(req.body);
+
+})
+
+
+
+//to apply before defined validations like unique:true during schema creation enter the below lines and connect to specific db like
+connetonstring/db-name
+
+mongoose.model('name of the collection in the db where the documents will be stored','DefinedSchema')
+
+const User=mongoose.model('user',UserSchema);
+User.createIndexes();
+module.exports = User;
+
+
+The User.create() method in Mongoose is used to create new documents (also known as records or entries) in a MongoDB collection associated with the Mongoose model User. It is a convenient way to insert one or more documents into the database based on the schema you've defined for the model.
+
+example :
+const User = mongoose.model('User', UserSchema);
+
+// Creating a single user document
+User.create({
+  name: 'John Doe',
+  email: 'john@example.com',
+  password: 'password123'
+})
+  .then(user => {
+    console.log('User created:', user);
+  })
+  .catch(error => {
+    console.error('Error creating user:', error);
+  });
+
+
